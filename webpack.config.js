@@ -1,5 +1,5 @@
 module.exports = {
-  // 開発モード
+  // 開発モードはdevelopment
   // 本番モードはproduction
   mode: "development",
   entry: "./src/assets/js/app.js",
