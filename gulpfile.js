@@ -9,6 +9,7 @@ const browserSync = require("browser-sync"); //ブラウザリロード
 const autoprefixer = require('gulp-autoprefixer'); //ベンダープレフィックス自動付与
 const postcss = require("gulp-postcss"); //css-mqpackerを使用
 const mqpacker = require('css-mqpacker'); //メディアクエリをまとめる
+const cssDeclarationSorter = require("css-declaration-sorter"); //cssプロパティをソート
 
 // 画像圧縮
 const change = require('gulp-changed');
@@ -76,27 +77,42 @@ const html = (done) => {
  *
  */
 const cssSass = (done) => {
-  gulp.src(srcPath.scss, {
-    sourcemaps: true
-  })
+  gulp
+    .src(srcPath.scss, {
+      sourcemaps: true,
+    })
     .pipe(
       //エラーが出ても処理を止めない
       plumber({
-        errorHandler: notify.onError('Error:<%= error.message %>')
-      }))
-    .pipe(sass({
-      outputStyle: 'expanded'
-    })) //指定できるキー expanded compressed
+        errorHandler: notify.onError("Error:<%= error.message %>"),
+      })
+    )
+    .pipe(
+      sass({
+        outputStyle: "expanded",
+      })
+    ) //指定できるキー expanded compressed
     .pipe(autoprefixer(TARGET_BROWSERS))
+    .pipe(
+      postcss([
+        cssDeclarationSorter({
+          order: "alphabetical",
+        }),
+      ])
+    ) //プロパティをアルファベット順にソート
     .pipe(postcss([mqpacker()])) // メディアクエリをまとめる
-    .pipe(gulp.dest(distPath.css, {
-      sourcemaps: './'
-    })) //コンパイル先
+    .pipe(
+      gulp.dest(distPath.css, {
+        sourcemaps: "./",
+      })
+    ) //コンパイル先
     .pipe(browserSync.stream())
-    .pipe(notify({
-      message: 'Sassをコンパイルしました！',
-      onLast: true
-    }));
+    .pipe(
+      notify({
+        message: "Sassをコンパイルしました！",
+        onLast: true,
+      })
+    );
   done();
 }
 

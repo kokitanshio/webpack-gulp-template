@@ -7,8 +7,8 @@
   position: relative;
 
   @include global.mq() {
-    max-width: global.$sp-inner;
-    padding: 0 global.$padding-sp;
+    max-width: global.$s-inner;
+    padding: 0 global.$padding-s;
   }
 
 }

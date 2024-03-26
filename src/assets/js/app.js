@@ -1,3 +1,5 @@
-import { swiper } from "./swiper"
+import { globalFunc } from "./global";
+import { splideFunc } from "./splide";
 
-swiper();
+globalFunc();
+splideFunc();
