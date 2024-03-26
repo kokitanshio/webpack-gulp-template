@@ -2,38 +2,38 @@
 @use "./function" as fn;
 
 // メディアクエリ
-@mixin mq($breakpoint: s){
-  @media #{map-get(var.$breakpoints,$breakpoint)}{
+@mixin mq($breakpoint: s) {
+  @media #{map-get(var.$breakpoints,$breakpoint)} {
     @content;
   }
 }
 
 // font周りのmixin
-@mixin font($size: null, $max-fz, $min-fz, $lh: null, $ls: null, $fw: null){
-  @if $size{
+@mixin font($size: null, $max-fz, $min-fz, $lh: null, $ls: null, $fw: null) {
+  @if $size {
     font-size: clamp(fn.rem($min-fz), calc($max-fz / $size * 100vw), fn.rem($max-fz));
   }
-  @if $lh{
+  @if $lh {
     line-height: fn.lh($lh, $max-fz);
   }
-  @if $ls{
+  @if $ls {
     letter-spacing: fn.spacing($ls);
   }
-  @if $fw{
+  @if $fw {
     font-weight: $fw;
   }
 }
 
 // font-sizeのVW化
-@mixin fz_vw($size: 16){
+@mixin fz_vw($size: 16) {
   font-size: fn.get_vw($size);
 }
 
 // ホバー時のmixin
 @mixin hover() {
-  @media(hover:hover) {
+  @media (hover: hover) {
     &:any-link:hover,
-    &:enabled:hover{
+    &:enabled:hover {
       @content;
     }
   }
