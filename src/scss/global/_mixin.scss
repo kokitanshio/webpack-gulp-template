@@ -2,7 +2,7 @@
 @use "./function" as fn;
 
 // メディアクエリ
-@mixin mq($breakpoint: m){
+@mixin mq($breakpoint: s){
   @media #{map-get(var.$breakpoints,$breakpoint)}{
     @content;
   }
@@ -29,12 +29,12 @@
   font-size: fn.get_vw($size);
 }
 
-// リンクのホバーアクションデフォルト
+// ホバー時のmixin
 @mixin hover() {
-  @include mq(hov){
-    transition: opacity var.$ts-time ease;
-    &:hover{
-      opacity: 0.7;
+  @media(hover:hover) {
+    &:any-link:hover,
+    &:enabled:hover{
+      @content;
     }
   }
 }
