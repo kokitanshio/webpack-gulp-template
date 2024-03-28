@@ -1,15 +1,15 @@
 @use "../global/" as global;
 
-.u-hide{
+.u-hide {
   display: block;
-  @include global.mq(){
+  @include global.mq() {
     display: none;
   }
 }
 
-.u-show{
+.u-show {
   display: none;
-  @include global.mq(){
+  @include global.mq() {
     display: block;
   }
 }
