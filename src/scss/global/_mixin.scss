@@ -9,9 +9,9 @@
 }
 
 // font周りのmixin
-@mixin font($size-pc: null, $size-sp: null, $max-fz, $min-fz, $lh: null, $ls: null, $fw: null) {
+@mixin font($size: null, $max-fz, $min-fz, $lh: null, $ls: null, $fw: null) {
   @if $size {
-    font-size: clamp(fn.rem($min-fz), calc((($max-fz + $min-fz) / 2) / ((($max-fz + $min-fz) / 2)) * 100vw), fn.rem($max-fz));
+    font-size: clamp(fn.rem($min-fz), calc($max-fz / $size * 100vw), fn.rem($max-fz));
   }
   @if $lh {
     line-height: fn.lh($lh, $max-fz);
